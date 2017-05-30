@@ -183,16 +183,10 @@ class DQNAgent():
         batch_index = list(np.random.randint(0,memsize,(self.batch_num)))
         batch =np.array( [self.experienceMemory[i] for i in batch_index ])
         x = batch[:,0:STATE_NUM].reshape( (self.batch_num,-1)).astype(np.float32)
-        # print(x)
         targets=[]
-        # targets=np.zeros((x.shape[0],4))
-        # targets=np.array([self.get_action_value(x[j]) for i in x.shape[0]])
         for j in range(x.shape[0]):
-        #   targets[j]=self.get_action_value(x[j])
             targets.append(np.ndarray.tolist(self.get_action_value(x[j])))
-        #targets=self.get_action_value(x).data.copy()
         targets = np.array(targets)
-        # print("targets=",targets)
 
         for i in range(self.batch_num):
             #[ seq..., action, reward, seq_new]
@@ -202,15 +196,6 @@ class DQNAgent():
             new_seq= batch[i,(STATE_NUM+2):(STATE_NUM*2+2)]
             targets[i,ai]=( r+ self.gamma * np.max(self.get_action_value(new_seq)))
         t =targets
-        #t = Variable(np.array(targets).reshape((self.batch_num,-1)).astype(np.float32))
-
-
-        # ネットの更新
-        # self.model.zerograds()
-        # loss=self.model(x ,t)
-        # self.loss = loss.data
-        # loss.backward()
-        # self.optimizer.update()
 
         # training
         for i in range(x.shape[0]):
