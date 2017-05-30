@@ -314,4 +314,4 @@ if __name__ == '__main__':
             break
 
     env.monitor_close()
-    gym.upload('./private/tmp/cartpole-experiment-3', api_key='sk_GDB9izzTxu1PyxNAdhcw')
+    gym.upload('./private/tmp/cartpole-experiment-3', api_key='your_key')
